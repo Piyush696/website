@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+<body>
+  <div class="container" ng-app="ShoppingListCheckOff">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row" ng-controller="ToBuyController as toBuy">
+
+    <!-- To Buy List -->
+	  <h2>To Buy:</h2>
+    <div class="col-md-6">
+     
+     <ul>
+       <li ng-repeat="item in toBuy.items">Buy {{item.quantity}} {{item.name}}(s) <button class="btn btn-default" ng-click="toBuy.checkOff($index);"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+     </ul>
+		<div class="emptyMessage" ng-show="toBuy.message()">Everything is bought!</div>
+		
+    </div>
+	  <br>
+
+    <!-- Already Bought List -->
+		<h2>Already Bought:</h2>
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as itemsBought">     
+	 
+     <ul>
+       <li ng-repeat = "item in itemsBought.items">Bought {{item.quantity}} {{item.name}}(s)</li>
+     </ul>
+	 <div class="emptyMessage" ng-show="itemsBought.message()">Nothing bought yet.</div>
+	</div>
+  </div>
+</div>
+
+</body>
+</html>
